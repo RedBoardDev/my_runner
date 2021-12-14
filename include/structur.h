@@ -24,6 +24,7 @@ typedef struct game_object_s {
     sfIntRect rect;
     float speed;
     int pos_incr;
+    sfClock *clock;
 } game_object_t;
 
 

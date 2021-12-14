@@ -26,7 +26,6 @@ int main(int avc, char **avg)
     init_sfml.window = create_window("MAIS OUI BIEN SUR");
     init_sfml.framebuffer = framebuffer_create(WIDTH, HEIGHT);
     init_sfml.texture = sfTexture_createFromFile("img/texture.png", NULL);
-    sfWindow_setFramerateLimit(init_sfml.window, 60);
     if (!init_sfml.window || !init_sfml.framebuffer)
         return (84);
     my_runner(&init_sfml, clock);

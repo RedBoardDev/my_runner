@@ -29,43 +29,63 @@ void put_parallax(init_sfml_t *init_sfml, game_object_t *obj)
     }
 }
 
-int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj, int sprite,
-sfClock *clock)
+int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj, int sprite)
 {
     int nb = 3;
-    if (sfClock_getElapsedTime(clock).microseconds <= 100000)
-        return (sprite);
-    sfClock_restart(clock);
-    sprite = sprite < 2 ? ++sprite : 0;
-    obj[nb].pos.x = WIDTH / 3;
-    if (obj[nb].pos.y > HEIGHT / 1.24 - 2)
+    int bool = 0;
+
+    if (sfKeyboard_isKeyPressed(sfKeySpace) && obj[3].pos.y >= 0) {
+        obj[3].pos_incr = -10;
+        bool = 1;
+    }
+    obj[3].pos.y += obj[3].pos_incr;
+    if (obj[3].pos.y < 820)
+        obj[3].pos_incr = 10;
+    if (obj[3].pos.y >= 820)
+        obj[3].pos_incr = 0;
+    if (sfClock_getElapsedTime(obj[3].clock).microseconds >= 100000) {
+        sprite = sprite < 3 ? ++sprite : 0;
+        sfClock_restart(obj[3].clock);
+    }
+    if (obj[nb].pos.y >= 820) {
         switch (sprite) {
-        case 0:
-            obj[nb].rect.top = 0;
-            obj[nb].rect.left = 5760;
-            obj[nb].rect.width = 84;
-            obj[nb].rect.height = 178;
+        case 0: //1er
+            obj[nb].rect.top = 12;
+            obj[nb].rect.left = 5765;
+            obj[nb].rect.width = 116;
+            obj[nb].rect.height = 162;
             break;
-        case 1:
-            obj[nb].rect.top = 0;
-            obj[nb].rect.left = 5855;
-            obj[nb].rect.width = 84;
-            obj[nb].rect.height = 178;
+        case 1: //2ieme
+            obj[nb].rect.top = 12;
+            obj[nb].rect.left = 5895;
+            obj[nb].rect.width = 118;
+            obj[nb].rect.height = 168;
             break;
-        case 2:
-            obj[nb].rect.top = 0;
-            obj[nb].rect.left = 5940;
-            obj[nb].rect.width = 84;
-            obj[nb].rect.height = 178;
+        case 2: //3ième
+            obj[nb].rect.top = 12;
+            obj[nb].rect.left = 6031;
+            obj[nb].rect.width = 116;
+            obj[nb].rect.height = 168;
+            break;
+        case 3: //4ième
+            obj[nb].rect.top = 12;
+            obj[nb].rect.left = 6158;
+            obj[nb].rect.width = 124;
+            obj[nb].rect.height = 162;
             break;
         default:
             break;
         }
-    else {
-        obj[nb].rect.top = 0;
-        obj[nb].rect.left = 6035;
-        obj[nb].rect.width = 84;
-        obj[nb].rect.height = 178;
+    } else if (bool) {
+            obj[nb].rect.top = 12;
+            obj[nb].rect.left = 6424;
+            obj[nb].rect.width = 124;
+            obj[nb].rect.height = 186;
+    } else {
+            obj[nb].rect.top = 12;
+            obj[nb].rect.left = 6300;
+            obj[nb].rect.width = 110;
+            obj[nb].rect.height = 166;
     }
     sfSprite_setTextureRect(obj[nb].sprite, obj[nb].rect);
     sfSprite_setPosition(obj[nb].sprite, obj[nb].pos);
@@ -75,13 +95,24 @@ sfClock *clock)
 void put_score(int score, init_sfml_t *init_sfml)
 {
     sfText *text = sfText_create();
-    sfVector2f vector = {50, 50};
+    sfVector2f vector = {100, 100};
+    sfFont *font  = sfFont_createFromFile("test.ttf");
 
-    sfText_setString(text, "Hello SFML");
-    sfText_setCharacterSize(text, 50);
+    sfText_setFont(text, font);
+    sfText_setString(text, my_itoa(score));
+    sfText_setCharacterSize(text, 24);
     sfText_setPosition(text, vector);
     sfText_setColor(text, sfRed);
-    sfRenderWindow_drawText(init_sfml->window, text, sfFalse);
+    sfRenderWindow_drawText(init_sfml->window, text, NULL);
+}
+
+int is_collided(sfSprite *sprite1, sfSprite *sprite2)
+{
+    sfFloatRect lazer = sfSprite_getGlobalBounds(sprite1);
+    sfFloatRect sprite = sfSprite_getGlobalBounds(sprite2);
+    if (sfFloatRect_intersects(&lazer, &sprite, sfFalse))
+        return (1);
+    return (0);
 }
 
 void my_runner(init_sfml_t *init_sfml, sfClock *clock)
@@ -89,23 +120,19 @@ void my_runner(init_sfml_t *init_sfml, sfClock *clock)
     game_object_t *obj = malloc(sizeof(game_object_t) * OBJ_NBR);
     int sprite = 0;
     int score = 0;
-
     inits_obj(obj, init_sfml);
     while (sfRenderWindow_isOpen(init_sfml->window)) {
         put_parallax(init_sfml, obj);
-        sprite = draw_sprite_walk(init_sfml, obj, sprite, clock);
-
-        if (analyse_events(init_sfml->window, init_sfml, obj))
-            obj[3].pos_incr = -20;
-        else if (obj[3].pos.y < HEIGHT / 1.24 - 1 && obj[3].pos_incr == 0)
-            obj[3].pos_incr = 6;
-        else
-            obj[3].pos_incr = 0;
-        obj[3].pos.y += obj[3].pos_incr;
-                
+        sprite = draw_sprite_walk(init_sfml, obj, sprite);
+        analyse_events(init_sfml->window, init_sfml, obj);
+        ++score;
+        if (is_collided(obj[4].sprite, obj[3].sprite))
+            score = 1;
+        draw_lazer(init_sfml, obj);
         for (int i = 0; i < OBJ_NBR; ++i)
             sfRenderWindow_drawSprite(init_sfml->window, obj[i].sprite, NULL);
         put_score(score, init_sfml);
         function_sfml_whil(init_sfml, sfBlack);
     }
+    free(obj);
 }

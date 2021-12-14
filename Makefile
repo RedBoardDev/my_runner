@@ -6,11 +6,11 @@
 ##
 
 SRC	=	src/my_runner.c	\
-		src/utils/draw_utils.c	\
 		src/utils/utils_csfml.c	\
 		src/events.c	\
 		src/main.c	\
 		src/inits_obj.c	\
+		src/lazer.c	\
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -29,7 +29,7 @@ LIB	=	-I./include -L./lib -lmy
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(CSFML_FLAGS)
+	$(CC) -o $(NAME) $(OBJ) $(LIB) $(CSFML_FLAGS)
 
 clean:
 	rm -f $(OBJ)

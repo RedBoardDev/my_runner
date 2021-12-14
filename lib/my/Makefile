@@ -40,6 +40,7 @@ SRC	=	my_compute_power_rec.c 	\
 		my_atoi.c	\
 		my_is.c	\
 		my_strdup.c	\
+		my_itoa.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -32,54 +32,37 @@ void inits_paralax(game_object_t *obj, init_sfml_t *init_sfml)
 
 void inits_player(game_object_t *obj, init_sfml_t *init_sfml)
 {
-    obj[3].rect.top = 0;
-    obj[3].rect.left = 5760;
-    obj[3].rect.width = 84;
-    obj[3].rect.height = 178;
+    obj[3].rect.top = 12;
+    obj[3].rect.left = 5765;
+    obj[3].rect.width = 116;
+    obj[3].rect.height = 162;
     obj[3].speed = 0;
     obj[3].sprite = sfSprite_create();
     obj[3].pos.x = WIDTH / 3;
-    obj[3].pos.y = HEIGHT / 1.24;
-
-    // obj[4].rect.top = 0;
-    // obj[4].rect.left = 5855;
-    // obj[4].rect.width = 84;
-    // obj[4].rect.height = 178;
-    // obj[4].speed = 0;
-    // obj[4].sprite = sfSprite_create();
-    // obj[4].pos.x = WIDTH / 3;
-    // obj[4].pos.y = HEIGHT / 1.24;
-
-    // obj[5].rect.top = 0;
-    // obj[5].rect.left = 5940;
-    // obj[5].rect.width = 84;
-    // obj[5].rect.height = 178;
-    // obj[5].speed = 0;
-    // obj[5].sprite = sfSprite_create();
-    // obj[5].pos.x = WIDTH / 3;
-    // obj[5].pos.y = HEIGHT / 1.24;
-
-    // obj[6].rect.top = 0;
-    // obj[6].rect.left = 6035;
-    // obj[6].rect.width = 84;
-    // obj[6].rect.height = 178;
-    // obj[6].speed = 0;
-    // obj[6].sprite = sfSprite_create();
-    // obj[6].pos.x = WIDTH / 3;
-    // obj[6].pos.y = HEIGHT / 1.24;
+    obj[3].pos.y = 820;
+    obj[3].pos_incr = 0;
+    obj[3].clock = sfClock_create();
 }
 
 void inits_lazer(game_object_t *obj, init_sfml_t *init_sfml)
 {
-    // obj[7].rect.top = 200;
-    // obj[7].rect.left = 5760;
-    // obj[7].rect.width = 248;
-    // obj[7].rect.height = 76;
-    // obj[7].speed = 0;
-    // obj[7].sprite = sfSprite_create();
-    // obj[7].pos.x = 0;
-    // obj[7].pos.y = 0;
+    obj[4].rect.top = 383;
+    obj[4].rect.left = 5760;
+    obj[4].rect.width = 246;
+    obj[4].rect.height = 78;
+    obj[4].speed = 14;
+    obj[4].sprite = sfSprite_create();
+    obj[4].pos.x = WIDTH + 100;
+    obj[4].pos.y = HEIGHT - 200;
 
+    obj[5].rect.top = 383;
+    obj[5].rect.left = 5760;
+    obj[5].rect.width = 246;
+    obj[5].rect.height = 78;
+    obj[5].speed = 14;
+    obj[5].sprite = sfSprite_create();
+    obj[5].pos.x = WIDTH + 100;
+    obj[5].pos.y = HEIGHT - 200;
 }
 
 void inits_obj(game_object_t *obj, init_sfml_t *init_sfml)

@@ -56,5 +56,6 @@ int isnum(char c);
 int my_atoi(char const *src);
 char *my_strcat_2(char const *dest, char const *src);
 char *my_strdup(char const *src);
+char *my_itoa(int nb);
 
 #endif

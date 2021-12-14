@@ -28,7 +28,7 @@
 
 #define WIDTH 1920
 #define HEIGHT 1080
-#define OBJ_NBR 4
+#define OBJ_NBR 6
 
 #define OVERWIDTH(w)    w <= 0 ? w = 1: w; \
                         w >= WIDTH ? w = WIDTH - 1 : w;
@@ -51,5 +51,6 @@ game_object_t *obj);
 int main(int avc, char **avg);
 void my_runner(init_sfml_t *init_sfml, sfClock *clock);
 void inits_obj(game_object_t *obj, init_sfml_t *init_sfml);
+void draw_lazer(init_sfml_t *init_sfml, game_object_t *obj);
 
 #endif
