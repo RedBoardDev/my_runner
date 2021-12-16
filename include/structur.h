@@ -18,7 +18,7 @@ typedef struct init_sfml_s {
 } init_sfml_t;
 
 typedef struct game_object_s {
-    int enumer;
+    int jump;
     sfSprite *sprite;
     sfVector2f pos;
     sfIntRect rect;
@@ -27,5 +27,10 @@ typedef struct game_object_s {
     sfClock *clock;
 } game_object_t;
 
+typedef struct play_data_s {
+    int sprite;
+    int score;
+    int start;
+} play_data_t;
 
 #endif

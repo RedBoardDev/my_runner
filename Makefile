@@ -11,6 +11,8 @@ SRC	=	src/my_runner.c	\
 		src/main.c	\
 		src/inits_obj.c	\
 		src/lazer.c	\
+		src/put_text.c \
+		src/put_sprite.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

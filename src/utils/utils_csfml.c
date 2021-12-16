@@ -8,6 +8,13 @@
 #include "../../include/my_runner.h"
 #include "../../include/structur.h"
 
+int my_rand(int min, int max)
+{
+    int rand_int = min + rand() % (max - min);
+
+   return (rand_int);
+}
+
 sfUint8 *framebuffer_create(int w, int h)
 {
     return (malloc(sizeof(sfUint8) * (w * h * 4)));

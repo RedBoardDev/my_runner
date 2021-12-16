@@ -28,7 +28,7 @@
 
 #define WIDTH 1920
 #define HEIGHT 1080
-#define OBJ_NBR 6
+#define OBJ_NBR 8
 
 #define OVERWIDTH(w)    w <= 0 ? w = 1: w; \
                         w >= WIDTH ? w = WIDTH - 1 : w;
@@ -46,11 +46,14 @@ sfUint8 *framebuffer_create(int w, int h);
 void function_sfml_whil(init_sfml_t *init_sfml, sfColor c);
 int draw_rectangle(sfVector2i pts_a, sfVector2i pts_b, sfUint8 *fm, sfColor c);
 int draw_circle(sfUint8 *fm, sfVector2i center, int radius, sfColor c);
-int analyse_events(sfRenderWindow *window, init_sfml_t *init_sfml,
-game_object_t *obj);
+int analyse_events(init_sfml_t *init_sfml, game_object_t *obj,
+play_data_t *play_data);
 int main(int avc, char **avg);
 void my_runner(init_sfml_t *init_sfml, sfClock *clock);
 void inits_obj(game_object_t *obj, init_sfml_t *init_sfml);
 void draw_lazer(init_sfml_t *init_sfml, game_object_t *obj);
+int my_rand(int min, int max);
+void put_score(int nbr, init_sfml_t *init_sfml);
+int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj, int sprite);
 
 #endif

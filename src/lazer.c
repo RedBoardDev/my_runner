@@ -9,14 +9,14 @@
 
 void set_lazer(game_object_t *obj)
 {
-    int bool = rand() % 8;
+    int bool = my_rand(0,8);
     sfVector2f origin = {246 / 2, 78 / 2};
 
     sfSprite_setOrigin(obj->sprite, origin);
     obj->pos.x -= obj->speed;
     if (obj->pos.x <= - 100) {
-        obj->pos.y = rand() % ((HEIGHT - 200) - 86 + 1) + 86;
-        obj->pos.x = WIDTH + 100;
+        obj->pos.y = my_rand(86, HEIGHT - 200);
+        obj->pos.x = WIDTH + my_rand(300,1920);
         if (bool > 3)
             sfSprite_rotate(obj->sprite, 90);
     }
@@ -26,8 +26,7 @@ void set_lazer(game_object_t *obj)
 
 void draw_lazer(init_sfml_t *init_sfml, game_object_t *obj)
 {
-
-    for (int i = 0; i <= 1; ++i) {
+    for (int i = 0; i < 3; ++i) {
         set_lazer(&obj[i + 4]);
     }
 }
