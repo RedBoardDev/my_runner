@@ -13,6 +13,7 @@ SRC	=	src/my_runner.c	\
 		src/lazer.c	\
 		src/put_text.c \
 		src/put_sprite.c	\
+		src/collision.c	\
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -31,6 +32,7 @@ LIB	=	-I./include -L./lib -lmy
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
+	make -C lib/my
 	$(CC) -o $(NAME) $(OBJ) $(LIB) $(CSFML_FLAGS)
 
 clean:

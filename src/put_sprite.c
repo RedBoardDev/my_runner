@@ -9,29 +9,33 @@
 #include "../include/structur.h"
 #include "../include/my.h"
 
-int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj, int sprite)
+int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj,
+play_data_t *play_data, sound_ambiant_t *sound_ambiant)
 {
     int nb = 3;
-    int bool = 0;
+    int sprite_bool = 0;
 
     if (obj[3].jump == 1) {
-        bool = 1;
+        sfMusic_setVolume(sound_ambiant->rocket, 50);
+        sprite_bool = 1;
         if (obj[3].pos.y >= 0)
-            obj[3].pos_incr = -10;
+            obj[3].pos_incr = -12;
         else
             obj[3].pos_incr = 0;
-    }
+    } else
+        sfMusic_setVolume(sound_ambiant->rocket, 0);
     obj[3].pos.y += obj[3]  .pos_incr;
     if (obj[3].pos.y < 820)
-        obj[3].pos_incr = 10;
+        obj[3].pos_incr = 12;
     if (obj[3].pos.y >= 820)
         obj[3].pos_incr = 0;
     if (sfClock_getElapsedTime(obj[3].clock).microseconds >= 100000) {
-        sprite = sprite < 3 ? ++sprite : 0;
+        play_data->sprite = play_data->sprite < 3 ? ++play_data->sprite : 0;
         sfClock_restart(obj[3].clock);
     }
     if (obj[nb].pos.y >= 820) {
-        switch (sprite) {
+        sfMusic_setVolume(sound_ambiant->walk, 100);
+        switch (play_data->sprite) {
         case 0: //1er
             obj[nb].rect.top = 12;
             obj[nb].rect.left = 5765;
@@ -59,12 +63,14 @@ int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj, int sprite)
         default:
             break;
         }
-    } else if (bool) {
+    } else if (sprite_bool) {
+            sfMusic_setVolume(sound_ambiant->walk, 0);
             obj[nb].rect.top = 12;
             obj[nb].rect.left = 6424;
             obj[nb].rect.width = 124;
             obj[nb].rect.height = 186;
     } else {
+            sfMusic_setVolume(sound_ambiant->walk, 0);
             // sfSoundBuffer *buffer;
             // sfSoundBuffer_createFromFile("walk.ogg");
             // sfSound *sound = sfSound_create();
@@ -80,5 +86,4 @@ int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj, int sprite)
     }
     sfSprite_setTextureRect(obj[nb].sprite, obj[nb].rect);
     sfSprite_setPosition(obj[nb].sprite, obj[nb].pos);
-    return (sprite);
 }

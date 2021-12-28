@@ -24,11 +24,12 @@
     #include <sys/types.h>
     #include <sys/stat.h>
     #include <fcntl.h>
+    #include <stdbool.h>
     #include "structur.h"
 
 #define WIDTH 1920
 #define HEIGHT 1080
-#define OBJ_NBR 8
+#define OBJ_NBR 9
 
 #define OVERWIDTH(w)    w <= 0 ? w = 1: w; \
                         w >= WIDTH ? w = WIDTH - 1 : w;
@@ -54,6 +55,8 @@ void inits_obj(game_object_t *obj, init_sfml_t *init_sfml);
 void draw_lazer(init_sfml_t *init_sfml, game_object_t *obj);
 int my_rand(int min, int max);
 void put_score(int nbr, init_sfml_t *init_sfml);
-int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj, int sprite);
+int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj,
+play_data_t *play_data, sound_ambiant_t *sound_ambiant);
+int is_collided_sprite(game_object_t *obj);
 
 #endif

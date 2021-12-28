@@ -6,6 +6,7 @@
 */
 
 #include "my_runner.h"
+#include <stdbool.h>
 
 #ifndef STRUCTURE_H_
     #define STRUCTURE_H_
@@ -15,6 +16,10 @@ typedef struct init_sfml_s {
     sfUint8 *framebuffer;
     sfTexture *texture;
     sfSprite *sprite;
+    bool infini;
+    char **map;
+    float speed_coef;
+    sfClock *clock;
 } init_sfml_t;
 
 typedef struct game_object_s {
@@ -29,8 +34,15 @@ typedef struct game_object_s {
 
 typedef struct play_data_s {
     int sprite;
-    int score;
+    float score;
     int start;
+    int speed;
 } play_data_t;
+
+typedef struct sound_ambiant_s {
+    sfMusic *walk;
+    sfMusic *rocket;
+} sound_ambiant_t;
+
 
 #endif
