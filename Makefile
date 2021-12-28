@@ -14,6 +14,7 @@ SRC	=	src/my_runner.c	\
 		src/put_text.c \
 		src/put_sprite.c	\
 		src/collision.c	\
+		src/inits.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -22,10 +23,10 @@ NAME	=	my_runner
 CC	=	gcc -g
 
 CSFML_FLAGS	=	-lcsfml-graphics    \
-			-lcsfml-window    \
-			-lcsfml-system    \
-			-lcsfml-audio	\
-			-lm
+				-lcsfml-window    \
+				-lcsfml-system    \
+				-lcsfml-audio	\
+				-lm
 
 LIB	=	-I./include -L./lib -lmy
 

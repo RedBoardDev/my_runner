@@ -58,5 +58,6 @@ void put_score(int nbr, init_sfml_t *init_sfml);
 int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj,
 play_data_t *play_data, sound_ambiant_t *sound_ambiant);
 int is_collided_sprite(game_object_t *obj);
+play_data_t init_play_data();
 
 #endif

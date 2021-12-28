@@ -21,16 +21,6 @@ int put_parallax(init_sfml_t *init_sfml, game_object_t *obj)
     init_sfml->speed_coef <= 2 ? (init_sfml->speed_coef += 0.0002) : 0;
 }
 
-play_data_t init_play_data()
-{
-    play_data_t play_data;
-
-    play_data.score = 0;
-    play_data.sprite = 0;
-    play_data.start = 0;
-    return (play_data);
-}
-
 void put_main_menu(init_sfml_t *init_sfml, game_object_t *obj,
 play_data_t *play_data, sound_ambiant_t *sound_ambiant)
 {
@@ -53,13 +43,18 @@ void move_scientifist(init_sfml_t *init_sfml, game_object_t *obj, float speed)
     obj->pos.x = obj->pos.x - speed;
 }
 
+void is_dead(play_data_t *play_data)
+{
+    play_data->start = 0;
+}
+
 void put_game(init_sfml_t *init_sfml, game_object_t *obj,
 play_data_t *play_data, sound_ambiant_t *sound_ambiant) {
     put_parallax(init_sfml, obj);
     draw_sprite_walk(init_sfml, obj, play_data, sound_ambiant);
     play_data->score += init_sfml->speed_coef - 1;
     if (is_collided_sprite(obj))
-        play_data->start = 0;
+        is_dead(play_data);
     draw_lazer(init_sfml, obj);
     sfSprite_setPosition(obj[8].sprite, obj[8].pos);
     move_scientifist(init_sfml, &obj[8], obj[2].speed);
@@ -77,7 +72,7 @@ void my_runner(init_sfml_t *init_sfml, sfClock *clock)
 
     sfMusic *music = sfMusic_createFromFile("megalovania-x-jetpack-joyride-remix-mashup.ogg");
     sound_ambiant.walk = sfMusic_createFromFile("walk.ogg");
-    sound_ambiant.rocket = sfMusic_createFromFile("rocketflame1.ogg");
+    sound_ambiant.rocket = sfMusic_createFromFile("include/sounds/rocket.ogg");
 
     sfMusic_play(music);
     sfMusic_play(sound_ambiant.walk);
@@ -89,7 +84,7 @@ void my_runner(init_sfml_t *init_sfml, sfClock *clock)
     sfMusic_setVolume(sound_ambiant.walk, 0);
     sfMusic_setVolume(sound_ambiant.rocket, 0);
     while (sfRenderWindow_isOpen(init_sfml->window)) {
-        if (sfClock_getElapsedTime(init_sfml->clock).microseconds >= 100) {
+        if (sfClock_getElapsedTime(init_sfml->clock).microseconds >= 1000) {
         sfClock_restart(init_sfml->clock);
             if (play_data.start)
                 put_game(init_sfml, obj, &play_data, &sound_ambiant);
