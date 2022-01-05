@@ -37,6 +37,7 @@ void start_menu(game_object_t *obj, init_sfml_t *init_sfml)
     obj[7].rect.width = 1920;
     obj[7].rect.height = 1080;
     obj[7].speed = 0;
+    obj[7].clock = sfClock_create();
 }
 
 void inits_obj(game_object_t *obj, init_sfml_t *init_sfml)

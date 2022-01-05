@@ -29,4 +29,5 @@ void inits_paralax(game_object_t *obj, init_sfml_t *init_sfml)
     obj[2].rect.width = 1920;
     obj[2].rect.height = 1080;
     obj[2].speed = 14;
+    obj[2].clock = sfClock_create();
 }

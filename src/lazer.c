@@ -67,11 +67,26 @@ void set_lazer_maps(game_object_t *obj, init_sfml_t *init_sfml, int ligne)
     sfSprite_setPosition(obj[ligne + 4].sprite, obj[ligne + 4].pos);
 }
 
+void move_lazer(game_object_t *obj)
+{
+    if (sfClock_getElapsedTime(obj->clock).microseconds >= 140000) {
+        obj->rect.left = 5760 + 249;
+        if (sfClock_getElapsedTime(obj->clock).microseconds >= 140000 * 2)
+            sfClock_restart(obj->clock);
+    } else
+        obj->rect.left = 5760;
+}
+
 void draw_lazer(init_sfml_t *init_sfml, game_object_t *obj)
 {
+
+    move_lazer(&obj[7]);
+
     if (init_sfml->infini)
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < 3; ++i) {
             set_lazer_infini(&obj[i + 4], init_sfml);
+            
+        }
     else {
         for (int i = 0; i < 3; ++i)
             set_lazer_maps(obj, init_sfml, i);

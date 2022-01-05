@@ -39,7 +39,7 @@ void inits_lazer(game_object_t *obj, init_sfml_t *init_sfml)
     obj[6].sprite = sfSprite_create();
     obj[6].pos.x = WIDTH + my_rand(2800, 4000);
     obj[6].pos.y = my_rand(86, HEIGHT - 200);
-    obj[6].clock = sfClock_create();;
+    obj[6].clock = sfClock_create();
 }
 
 void inits_scientifists(game_object_t *obj, init_sfml_t *init_sfml)

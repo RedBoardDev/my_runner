@@ -25,7 +25,6 @@ void manage_missile(init_sfml_t *init_sfml, game_object_t *obj)
     if (sfClock_getElapsedTime(obj->clock).microseconds >= 50000) {
         sfClock_restart(obj->clock);
         if (obj->rect.left <= 5760 + (5 * 140)) {
-            printf("%d\n", obj->rect.left);
             obj->rect.left += 140;
         } else
             obj->rect.left = 5760;
