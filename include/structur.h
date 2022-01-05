@@ -42,6 +42,7 @@ typedef struct play_data_s {
 typedef struct sound_ambiant_s {
     sfMusic *walk;
     sfMusic *rocket;
+    sfMusic *main;
 } sound_ambiant_t;
 
 

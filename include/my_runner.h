@@ -29,7 +29,7 @@
 
 #define WIDTH 1920
 #define HEIGHT 1080
-#define OBJ_NBR 9
+#define OBJ_NBR 10
 
 #define OVERWIDTH(w)    w <= 0 ? w = 1: w; \
                         w >= WIDTH ? w = WIDTH - 1 : w;
@@ -59,5 +59,15 @@ int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj,
 play_data_t *play_data, sound_ambiant_t *sound_ambiant);
 int is_collided_sprite(game_object_t *obj);
 play_data_t init_play_data();
+
+// inits_obj
+void inits_paralax(game_object_t *obj, init_sfml_t *init_sfml);
+void inits_lazer(game_object_t *obj, init_sfml_t *init_sfml);
+void inits_scientifists(game_object_t *obj, init_sfml_t *init_sfml);
+void inits_player(game_object_t *obj, init_sfml_t *init_sfml);
+
+//missile
+void set_missile(game_object_t *obj, bool pos_x);
+void manage_missile(init_sfml_t *init_sfml, game_object_t *obj);
 
 #endif

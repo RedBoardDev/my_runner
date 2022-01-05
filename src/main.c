@@ -14,7 +14,7 @@ sfRenderWindow *create_window(char *name) {
     sfRenderWindow *window = sfRenderWindow_create(mode, name,
     sfFullscreen | sfClose, NULL);
 
-    sfWindow_setFramerateLimit((sfWindow *)window, 60);
+    sfWindow_setFramerateLimit((sfWindow *)window, 50);
     return (window);
 }
 

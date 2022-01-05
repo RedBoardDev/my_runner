@@ -9,12 +9,15 @@ SRC	=	src/my_runner.c	\
 		src/utils/utils_csfml.c	\
 		src/events.c	\
 		src/main.c	\
-		src/inits_obj.c	\
 		src/lazer.c	\
 		src/put_text.c \
 		src/put_sprite.c	\
 		src/collision.c	\
-		src/inits.c
+		src/inits.c	\
+		src/missile.c	\
+		src/inits_obj/inits_obj.c	\
+		src/inits_obj/inits_paralax.c	\
+		src/inits_obj/inits_sprites.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

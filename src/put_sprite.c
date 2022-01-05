@@ -36,25 +36,25 @@ play_data_t *play_data, sound_ambiant_t *sound_ambiant)
     if (obj[nb].pos.y >= 820) {
         sfMusic_setVolume(sound_ambiant->walk, 100);
         switch (play_data->sprite) {
-        case 0: //1er
+        case 0:
             obj[nb].rect.top = 12;
             obj[nb].rect.left = 5765;
             obj[nb].rect.width = 116;
             obj[nb].rect.height = 162;
             break;
-        case 1: //2ieme
+        case 1:
             obj[nb].rect.top = 12;
             obj[nb].rect.left = 5895;
             obj[nb].rect.width = 118;
             obj[nb].rect.height = 168;
             break;
-        case 2: //3ième
+        case 2:
             obj[nb].rect.top = 12;
             obj[nb].rect.left = 6031;
             obj[nb].rect.width = 116;
             obj[nb].rect.height = 168;
             break;
-        case 3: //4ième
+        case 3:
             obj[nb].rect.top = 12;
             obj[nb].rect.left = 6158;
             obj[nb].rect.width = 124;
@@ -71,14 +71,6 @@ play_data_t *play_data, sound_ambiant_t *sound_ambiant)
             obj[nb].rect.height = 186;
     } else {
             sfMusic_setVolume(sound_ambiant->walk, 0);
-            // sfSoundBuffer *buffer;
-            // sfSoundBuffer_createFromFile("walk.ogg");
-            // sfSound *sound = sfSound_create();
-            // sfSound_setBuffer(sound, buffer);
-            // sfSound_play(sound);
-            // sfSound_destroy(sound);
-            // sfSoundBuffer_destroy(buffer);
-
             obj[nb].rect.top = 12;
             obj[nb].rect.left = 6300;
             obj[nb].rect.width = 110;

@@ -12,7 +12,6 @@ void set_lazer_infini(game_object_t *obj, init_sfml_t *init_sfml)
     int rand_bool = my_rand(0,8);
     sfVector2f origin = {246 / 2, 78 / 2};
 
-    printf("cc\n");
     sfSprite_setOrigin(obj->sprite, origin);
     obj->pos.x -= obj->speed * init_sfml->speed_coef;
     if (obj->pos.x <= -100) {
@@ -25,41 +24,47 @@ void set_lazer_infini(game_object_t *obj, init_sfml_t *init_sfml)
     sfSprite_setPosition(obj->sprite, obj->pos);
 }
 
-void settings_lazer_maps(game_object_t *obj, init_sfml_t *init_sfml,
-bool rotate, int ligne)
+void set_pos_lazer_maps(game_object_t *obj, bool *rotate, int ligne, char c)
 {
-    sfVector2f origin = {246 / 2, 78 / 2};
-
-    sfSprite_setOrigin(obj->sprite, origin);
-    if (obj->pos.x <= - 100) {
+    if (obj[ligne + 4].pos.x <= -100) {
+        if (c == '2') {
+            rotate = false;
+            sfSprite_rotate(obj[ligne + 4].sprite, 90);
+        }
+        if (obj[ligne + 4].pos.x <= -100)
+            obj[ligne + 4].pos.x = WIDTH + 100;
         if (ligne == 0)
-            obj->pos.y = my_rand(95, 360);
+            obj[ligne + 4].pos.y = my_rand(95, 340);
         else if (ligne == 1)
-            obj->pos.y = my_rand(360, 720);
+            obj[ligne + 4].pos.y = my_rand(360, 710);
         else if (ligne == 2)
-            obj->pos.y = my_rand(720, 1080);
-        obj->pos.x = WIDTH + 150;
+            obj[ligne + 4].pos.y = my_rand(740, 950);
     }
-    sfSprite_setTextureRect(obj->sprite, obj->rect);
-    sfSprite_setPosition(obj->sprite, obj->pos);
 }
 
 void set_lazer_maps(game_object_t *obj, init_sfml_t *init_sfml, int ligne)
 {
     char c;
-    int j;
+    bool rotate = false;
     sfVector2f origin = {246 / 2, 78 / 2};
+
     sfSprite_setOrigin(obj[ligne + 4].sprite, origin);
     obj[ligne + 4].pos.x -= obj[ligne + 4].speed * init_sfml->speed_coef;
     c = init_sfml->map[ligne][obj[4].jump];
-    printf("%c ", c);
-    if (obj[ligne + 4].pos.x <= -100) {
-        obj[ligne + 4].pos.y = my_rand(95, HEIGHT - 200);
-        obj[ligne + 4].pos.x = WIDTH + my_rand(300,2920);
+    obj[4].jump += 1;
+    if (c != ' ') {
+        if (obj[4].jump >= 162)
+            obj[4].jump = 0;
+        if (sfClock_getElapsedTime(obj[ligne + 4].clock).microseconds >=
+        1000000) {
+            sfClock_restart(obj[ligne + 4].clock);
+            set_pos_lazer_maps(obj, &rotate, ligne, c);
+        }
     }
+    if (rotate)
+        sfSprite_rotate(obj[ligne + 4].sprite, -90);
     sfSprite_setTextureRect(obj[ligne + 4].sprite, obj[ligne + 4].rect);
     sfSprite_setPosition(obj[ligne + 4].sprite, obj[ligne + 4].pos);
-
 }
 
 void draw_lazer(init_sfml_t *init_sfml, game_object_t *obj)
@@ -70,8 +75,5 @@ void draw_lazer(init_sfml_t *init_sfml, game_object_t *obj)
     else {
         for (int i = 0; i < 3; ++i)
             set_lazer_maps(obj, init_sfml, i);
-        obj[4].jump += 1;
-        if (obj[4].jump >= 162)
-            obj[4].jump = 0;
     }
 }
