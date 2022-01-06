@@ -29,7 +29,7 @@ play_data_t *play_data, sound_ambiant_t *sound_ambiant)
         obj[3].pos_incr = 12;
     if (obj[3].pos.y >= 820)
         obj[3].pos_incr = 0;
-    if (sfClock_getElapsedTime(obj[3].clock).microseconds >= 100000) {
+    if (get_timeClock(obj[3].clock) >= 100000) {
         play_data->sprite = play_data->sprite < 3 ? ++play_data->sprite : 0;
         sfClock_restart(obj[3].clock);
     }
@@ -78,4 +78,16 @@ play_data_t *play_data, sound_ambiant_t *sound_ambiant)
     }
     sfSprite_setTextureRect(obj[nb].sprite, obj[nb].rect);
     sfSprite_setPosition(obj[nb].sprite, obj[nb].pos);
+}
+
+void manage_draw_sprite(init_sfml_t *init_sfml, game_object_t *obj)
+{
+    for (int i = 0; i < OBJ_NBR; ++i)
+        sfRenderWindow_drawSprite(init_sfml->window, obj[i].sprite, NULL);
+    for (int i = 0; i < 3; ++i)
+        sfRenderWindow_drawSprite(init_sfml->window, obj[i].sprite, NULL);
+    sfRenderWindow_drawSprite(init_sfml->window, obj[8].sprite, NULL);
+    for (int i = 3; i < 7; ++i)
+        sfRenderWindow_drawSprite(init_sfml->window, obj[i].sprite, NULL);
+    sfRenderWindow_drawSprite(init_sfml->window, obj[9].sprite, NULL);
 }

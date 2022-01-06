@@ -9,26 +9,28 @@
 #include "../include/structur.h"
 #include "../include/my.h"
 
-void set_missile(game_object_t *obj, bool pos_x)
+void sprite_missile(game_object_t *obj)
 {
-    obj->rect.top = 500;
-    obj->rect.left = 1920 * 3;
-    obj->rect.width = 125;
-    obj->rect.height = 90;
-    if (pos_x)
-        obj->pos.x = WIDTH + 100;
-
+    if (get_timeClock(obj->game_clock.missile_sprite) >= 60000) {
+        sfClock_restart(obj->game_clock.missile_sprite);
+        if (obj[9].rect.left <= 5760 + (3 * 120)) {
+            obj[9].rect.left += 120;
+        } else
+            obj[9].rect.left = 5760;
+        sfSprite_setTextureRect(obj[9].sprite, obj[9].rect);
+        sfSprite_setPosition(obj[9].sprite, obj[9].pos);
+    }
 }
 
 void manage_missile(init_sfml_t *init_sfml, game_object_t *obj)
 {
-    if (sfClock_getElapsedTime(obj->clock).microseconds >= 50000) {
-        sfClock_restart(obj->clock);
-        if (obj->rect.left <= 5760 + (5 * 140)) {
-            obj->rect.left += 140;
-        } else
-            obj->rect.left = 5760;
-        sfSprite_setTextureRect(obj->sprite, obj->rect);
-        sfSprite_setPosition(obj->sprite, obj->pos);
+    sprite_missile(obj);
+    if (get_timeClock(obj[9].clock) >= 5000000/*my_rand(8000000, 50000000)*/) {
+        sfClock_restart(obj[9].clock);
+        obj[9].pos.x = WIDTH - 200;
     }
+    if (obj[9].pos.x >= -200)
+        obj[9].pos.x -= 8 * init_sfml->speed_coef;
+    else
+        obj[9].pos.y = my_rand(10, HEIGHT - 10);
 }

@@ -12,7 +12,7 @@ int my_rand(int min, int max)
 {
     int rand_int = min + rand() % (max - min);
 
-   return (rand_int);
+    return (rand_int);
 }
 
 sfUint8 *framebuffer_create(int w, int h)
@@ -22,8 +22,10 @@ sfUint8 *framebuffer_create(int w, int h)
 
 void function_sfml_whil(init_sfml_t *init_sfml, sfColor c)
 {
-    // sfRenderWindow_clear(init_sfml->window, c);
-    // sfSprite_setTexture(init_sfml->sprite, init_sfml->texture, sfFalse);
-    // sfTexture_updateFromPixels(init_sfml->texture, init_sfml->framebuffer, WIDTH, HEIGHT, 0, 0);
     sfRenderWindow_display(init_sfml->window);
+}
+
+sfInt64 get_timeClock(sfClock *clock)
+{
+    return (sfClock_getElapsedTime(clock).microseconds);
 }

@@ -9,14 +9,14 @@
 
 void set_lazer_infini(game_object_t *obj, init_sfml_t *init_sfml)
 {
-    int rand_bool = my_rand(0,8);
+    int rand_bool = my_rand(0, 8);
     sfVector2f origin = {246 / 2, 78 / 2};
 
     sfSprite_setOrigin(obj->sprite, origin);
     obj->pos.x -= obj->speed * init_sfml->speed_coef;
     if (obj->pos.x <= -100) {
         obj->pos.y = my_rand(95, HEIGHT - 200);
-        obj->pos.x = WIDTH + my_rand(300,2920);
+        obj->pos.x = WIDTH + my_rand(300, 2920);
         if (rand_bool > 3)
             sfSprite_rotate(obj->sprite, 90);
     }
@@ -55,8 +55,7 @@ void set_lazer_maps(game_object_t *obj, init_sfml_t *init_sfml, int ligne)
     if (c != ' ') {
         if (obj[4].jump >= 162)
             obj[4].jump = 0;
-        if (sfClock_getElapsedTime(obj[ligne + 4].clock).microseconds >=
-        1000000) {
+        if (get_timeClock(obj[ligne + 4].clock) >= 1000000) {
             sfClock_restart(obj[ligne + 4].clock);
             set_pos_lazer_maps(obj, &rotate, ligne, c);
         }
@@ -69,24 +68,23 @@ void set_lazer_maps(game_object_t *obj, init_sfml_t *init_sfml, int ligne)
 
 void move_lazer(game_object_t *obj)
 {
-    if (sfClock_getElapsedTime(obj->clock).microseconds >= 140000) {
-        obj->rect.left = 5760 + 249;
-        if (sfClock_getElapsedTime(obj->clock).microseconds >= 140000 * 2)
-            sfClock_restart(obj->clock);
+    if (get_timeClock(obj->game_clock.lazer_sprite) >= 140000) {
+        for (int i = 0; i < 3; ++i)
+            obj[i + 4].rect.left = 5760 + 249;
+        if (get_timeClock(obj->game_clock.lazer_sprite) >= 140000 * 2)
+            sfClock_restart(obj->game_clock.lazer_sprite);
     } else
-        obj->rect.left = 5760;
+        for (int i = 0; i < 3; ++i)
+            obj[i + 4].rect.left = 5760;
 }
 
 void draw_lazer(init_sfml_t *init_sfml, game_object_t *obj)
 {
-
-    move_lazer(&obj[7]);
+    move_lazer(obj);
 
     if (init_sfml->infini)
-        for (int i = 0; i < 3; ++i) {
+        for (int i = 0; i < 3; ++i)
             set_lazer_infini(&obj[i + 4], init_sfml);
-            
-        }
     else {
         for (int i = 0; i < 3; ++i)
             set_lazer_maps(obj, init_sfml, i);

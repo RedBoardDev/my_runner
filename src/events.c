@@ -18,7 +18,8 @@ play_data_t *play_data)
             sfRenderWindow_close(init_sfml->window);
         else if (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape)
             sfRenderWindow_close(init_sfml->window);
-        if (event.type == sfEvtKeyPressed && event.key.code == sfKeySpace && jump != 1)
+        if (event.type == sfEvtKeyPressed && event.key.code == sfKeySpace &&
+            jump != 1)
             jump = 1;
         else if (event.type == sfEvtKeyReleased &&
         event.key.code == sfKeySpace)

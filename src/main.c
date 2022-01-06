@@ -28,21 +28,11 @@ void get_map(init_sfml_t *init_sfml, char *avg)
     init_sfml->map = malloc(sizeof(char *) * 3);
     for (int i = 0; i < 3; ++i)
         init_sfml->map[i] = malloc(sizeof(char) * 163);
-
     fd = open(avg, O_RDONLY);
     rd = read(fd, buffer, 489);
-
     for (int j = 0, r = 0; j < 3; ++j) {
-        for (int i = 0; i < 163 && buffer[r] != '\0'; ++i, ++r) {
+        for (int i = 0; i < 163 && buffer[r] != '\0'; ++i, ++r)
             init_sfml->map[j][i] = buffer[r];
-        }
-    }
-
-    for (int j = 0; j < 3; ++j) {
-        for (int i = 0; i < 162; ++i) {
-            printf("%c", init_sfml->map[j][i]);
-        }
-        printf("\n");
     }
 }
 
@@ -64,9 +54,8 @@ int main(int avc, char **avg)
     //     print_help();
     init_sfml.window = create_window("MAIS OUI BIEN SUR");
     init_sfml.framebuffer = framebuffer_create(WIDTH, HEIGHT);
-    init_sfml.texture = sfTexture_createFromFile("img/texture.png", NULL);
+    init_sfml.texture = sfTexture_createFromFile("ressources/img/texture.png", NULL);
     init_sfml.clock = sfClock_create();
-    
     if (!init_sfml.window || !init_sfml.framebuffer)
         return (84);
     my_runner(&init_sfml, clock);

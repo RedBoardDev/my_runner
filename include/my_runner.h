@@ -55,8 +55,6 @@ void inits_obj(game_object_t *obj, init_sfml_t *init_sfml);
 void draw_lazer(init_sfml_t *init_sfml, game_object_t *obj);
 int my_rand(int min, int max);
 void put_score(int nbr, init_sfml_t *init_sfml);
-int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj,
-play_data_t *play_data, sound_ambiant_t *sound_ambiant);
 int is_collided_sprite(game_object_t *obj);
 play_data_t init_play_data();
 
@@ -67,7 +65,23 @@ void inits_scientifists(game_object_t *obj, init_sfml_t *init_sfml);
 void inits_player(game_object_t *obj, init_sfml_t *init_sfml);
 
 //missile
-void set_missile(game_object_t *obj, bool pos_x);
+void sprite_missile(game_object_t *obj);
 void manage_missile(init_sfml_t *init_sfml, game_object_t *obj);
+
+//menu
+void put_main_menu(init_sfml_t *init_sfml, game_object_t *obj,
+play_data_t *play_data, sound_ambiant_t *sound_ambiant);
+
+//put_sprite
+void manage_draw_sprite(init_sfml_t *init_sfml, game_object_t *obj);
+int draw_sprite_walk(init_sfml_t *init_sfml, game_object_t *obj,
+play_data_t *play_data, sound_ambiant_t *sound_ambiant);
+
+//move
+void move_scientifist(init_sfml_t *init_sfml, game_object_t *obj, float speed);
+int move_parallax(init_sfml_t *init_sfml, game_object_t *obj);
+
+//utilscsfml
+sfInt64 get_timeClock(sfClock *clock);
 
 #endif

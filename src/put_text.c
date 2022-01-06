@@ -12,7 +12,7 @@ void put_score(int nbr, init_sfml_t *init_sfml)
 {
     sfText *text = sfText_create();
     sfVector2f vector = {30, 20};
-    sfFont *font  = sfFont_createFromFile("test2.ttf");
+    sfFont *font  = sfFont_createFromFile("ressources/fonts/text_text.ttf");
     sfColor color = {215, 215, 215, 255};
 
     sfText_setFont(text, font);

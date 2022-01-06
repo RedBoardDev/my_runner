@@ -8,7 +8,7 @@
 #include "../include/my_runner.h"
 #include "../include/structur.h"
 
-play_data_t init_play_data()
+play_data_t init_play_data(void)
 {
     play_data_t play_data;
 

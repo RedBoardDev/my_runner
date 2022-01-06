@@ -18,7 +18,6 @@ SRC	=	my_compute_power_rec.c 	\
 		my_showstr.c 	\
 		my_sort_int_array.c 	\
 		my_strcapitalize.c 	\
-		my_strcat.c 	\
 		my_strcmp.c 	\
 		my_strcpy.c 	\
 		my_str_isalpha.c 	\

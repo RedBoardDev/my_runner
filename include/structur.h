@@ -22,6 +22,11 @@ typedef struct init_sfml_s {
     sfClock *clock;
 } init_sfml_t;
 
+typedef struct game_clock_s {
+    sfClock *lazer_sprite;
+    sfClock *missile_sprite;
+} game_clock_t;
+
 typedef struct game_object_s {
     int jump;
     sfSprite *sprite;
@@ -30,6 +35,7 @@ typedef struct game_object_s {
     float speed;
     int pos_incr;
     sfClock *clock;
+    game_clock_t game_clock;
 } game_object_t;
 
 typedef struct play_data_s {
@@ -44,6 +50,5 @@ typedef struct sound_ambiant_s {
     sfMusic *rocket;
     sfMusic *main;
 } sound_ambiant_t;
-
 
 #endif

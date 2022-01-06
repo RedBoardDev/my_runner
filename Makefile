@@ -15,6 +15,8 @@ SRC	=	src/my_runner.c	\
 		src/collision.c	\
 		src/inits.c	\
 		src/missile.c	\
+		src/move.c	\
+		src/menu.c	\
 		src/inits_obj/inits_obj.c	\
 		src/inits_obj/inits_paralax.c	\
 		src/inits_obj/inits_sprites.c	\
