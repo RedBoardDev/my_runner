@@ -91,6 +91,7 @@ void inits_sounds(sound_ambiant_t *sound_ambiant);
 //dead
 void is_dead(play_data_t *play_data, sound_ambiant_t *sound_ambiant,
 game_object_t *obj, init_sfml_t *init_sfml);
+void set_pos_object(game_object_t *obj, int top, int left, int width);
 
 //events
 int events_close_window(init_sfml_t *init_sfml);

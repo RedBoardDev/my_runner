@@ -30,9 +30,9 @@ void my_sleep(int time_in_millisecond, init_sfml_t *init_sfml)
 
 void set_pos_object(game_object_t *obj, int top, int left, int width)
 {
-    obj->rect.top = 218;
-    obj->rect.left = 5903;
-    obj->rect.width = 105;
+    obj->rect.top = top;
+    obj->rect.left = left;
+    obj->rect.width = width;
 }
 
 void boucle_norme(game_object_t *obj, init_sfml_t *init_sfml, bool type)

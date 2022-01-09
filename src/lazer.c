@@ -57,7 +57,6 @@ void set_lazer_maps(game_object_t *obj, init_sfml_t *init_sfml, int ligne)
         obj[4].jump += 1;
         if (obj[4].jump >= 162)
             obj[4].jump = 0;
-        printf("%d\n", obj[4].jump);
     }
     set_sprite_pos_texture(init_sfml, &obj[ligne + 4]);
 }

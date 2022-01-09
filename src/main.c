@@ -36,7 +36,7 @@ void get_map(init_sfml_t *init_sfml, char *avg)
     }
 }
 
-void print_help()
+void print_help(void)
 {
     // A FAIRE
 }
@@ -59,7 +59,8 @@ int main(int avc, char **avg)
     }
     init_sfml.window = create_window("MAIS OUI BIEN SUR");
     init_sfml.framebuffer = framebuffer_create(WIDTH, HEIGHT);
-    init_sfml.texture = sfTexture_createFromFile("ressources/img/texture.png", NULL);
+    init_sfml.texture = sfTexture_createFromFile("ressources/img/texture.png",
+    NULL);
     init_sfml.clock = sfClock_create();
     if (!init_sfml.window || !init_sfml.framebuffer)
         return (84);

@@ -10,20 +10,14 @@
 
 void inits_lazer(game_object_t *obj, init_sfml_t *init_sfml)
 {
-    obj[4].rect.top = 383;
-    obj[4].rect.left = 5760;
-    obj[4].rect.width = 246;
+    set_pos_object(&obj[4], 383, 5760, 246);
     obj[4].rect.height = 78;
     obj[4].pos.x = WIDTH + my_rand(100, 800);
     obj[4].jump = 0;
-    obj[5].rect.top = 383;
-    obj[5].rect.left = 5760;
-    obj[5].rect.width = 246;
+    set_pos_object(&obj[5], 383, 5760, 246);
     obj[5].rect.height = 78;
     obj[5].pos.x = WIDTH + my_rand(1200, 2400);
-    obj[6].rect.top = 383;
-    obj[6].rect.left = 5760;
-    obj[6].rect.width = 246;
+    set_pos_object(&obj[6], 383, 5760, 246);
     obj[6].rect.height = 78;
     obj[6].pos.x = WIDTH + my_rand(2800, 4000);
     for (int i = 0; i < 3; ++i) {
