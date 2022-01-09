@@ -20,18 +20,17 @@ void set_lazer_infini(game_object_t *obj, init_sfml_t *init_sfml)
         if (rand_bool > 3)
             sfSprite_rotate(obj->sprite, 90);
     }
-    sfSprite_setTextureRect(obj->sprite, obj->rect);
-    sfSprite_setPosition(obj->sprite, obj->pos);
+    set_sprite_pos_texture(init_sfml, obj);
 }
 
-void set_pos_lazer_maps(game_object_t *obj, bool *rotate, int ligne, char c)
+void set_pos_lazer_maps(game_object_t *obj, int ligne, char c)
 {
     if (obj[ligne + 4].pos.x <= -100) {
-        if (c == '2') {
-            rotate = false;
-            sfSprite_rotate(obj[ligne + 4].sprite, 90);
-        }
-        if (obj[ligne + 4].pos.x <= -100)
+        if (c == '1')
+            sfSprite_setRotation(obj[ligne + 4].sprite, 0);
+        else if (c == '2')
+            sfSprite_setRotation(obj[ligne + 4].sprite, 90);
+        if (obj[6].pos.x <= -100)
             obj[ligne + 4].pos.x = WIDTH + 100;
         if (ligne == 0)
             obj[ligne + 4].pos.y = my_rand(95, 340);
@@ -45,28 +44,25 @@ void set_pos_lazer_maps(game_object_t *obj, bool *rotate, int ligne, char c)
 void set_lazer_maps(game_object_t *obj, init_sfml_t *init_sfml, int ligne)
 {
     char c;
-    bool rotate = false;
     sfVector2f origin = {246 / 2, 78 / 2};
 
     sfSprite_setOrigin(obj[ligne + 4].sprite, origin);
     obj[ligne + 4].pos.x -= obj[ligne + 4].speed * init_sfml->speed_coef;
     c = init_sfml->map[ligne][obj[4].jump];
-    obj[4].jump += 1;
-    if (c != ' ') {
+    if (obj[4].pos.x <= -100) {
+        sfClock_restart(obj[ligne + 4].clock);
+        if (c != ' ') {
+            set_pos_lazer_maps(obj, ligne, c);
+        }
+        obj[4].jump += 1;
         if (obj[4].jump >= 162)
             obj[4].jump = 0;
-        if (get_timeClock(obj[ligne + 4].clock) >= 1000000) {
-            sfClock_restart(obj[ligne + 4].clock);
-            set_pos_lazer_maps(obj, &rotate, ligne, c);
-        }
+        printf("%d\n", obj[4].jump);
     }
-    if (rotate)
-        sfSprite_rotate(obj[ligne + 4].sprite, -90);
-    sfSprite_setTextureRect(obj[ligne + 4].sprite, obj[ligne + 4].rect);
-    sfSprite_setPosition(obj[ligne + 4].sprite, obj[ligne + 4].pos);
+    set_sprite_pos_texture(init_sfml, &obj[ligne + 4]);
 }
 
-void move_lazer(game_object_t *obj)
+void move_sprite_lazer(game_object_t *obj)
 {
     if (get_timeClock(obj->game_clock.lazer_sprite) >= 140000) {
         for (int i = 0; i < 3; ++i)
@@ -80,13 +76,12 @@ void move_lazer(game_object_t *obj)
 
 void draw_lazer(init_sfml_t *init_sfml, game_object_t *obj)
 {
-    move_lazer(obj);
+    move_sprite_lazer(obj);
 
     if (init_sfml->infini)
         for (int i = 0; i < 3; ++i)
             set_lazer_infini(&obj[i + 4], init_sfml);
-    else {
+    else
         for (int i = 0; i < 3; ++i)
             set_lazer_maps(obj, init_sfml, i);
-    }
 }

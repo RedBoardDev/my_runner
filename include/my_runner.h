@@ -83,5 +83,16 @@ int move_parallax(init_sfml_t *init_sfml, game_object_t *obj);
 
 //utilscsfml
 sfInt64 get_timeClock(sfClock *clock);
+void set_sprite_pos_texture(init_sfml_t *init_sfml, game_object_t *obj);
+
+//inits
+void inits_sounds(sound_ambiant_t *sound_ambiant);
+
+//dead
+void is_dead(play_data_t *play_data, sound_ambiant_t *sound_ambiant,
+game_object_t *obj, init_sfml_t *init_sfml);
+
+//events
+int events_close_window(init_sfml_t *init_sfml);
 
 #endif

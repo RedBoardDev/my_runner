@@ -25,6 +25,7 @@ typedef struct init_sfml_s {
 typedef struct game_clock_s {
     sfClock *lazer_sprite;
     sfClock *missile_sprite;
+    sfClock *fly_sprite;
 } game_clock_t;
 
 typedef struct game_object_s {

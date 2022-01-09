@@ -36,22 +36,27 @@ void get_map(init_sfml_t *init_sfml, char *avg)
     }
 }
 
+void print_help()
+{
+    // A FAIRE
+}
+
 int main(int avc, char **avg)
 {
     init_sfml_t init_sfml;
     sfClock *clock = sfClock_create();
-    init_sfml.infini = true;
-    // if (avc < 2)
-    //     return (84);
-    if (avc > 2 && avg[1][0] == '-')
+
+    if (avc >= 2 && avg[1][0] == '-') {
         if  (avg[1][1] == 'i')
             init_sfml.infini = true;
         else if  (avg[1][1] == 'f') {
             init_sfml.infini = false;
             get_map(&init_sfml, avg[2]);
         }
-    // else
-    //     print_help();
+    } else {
+        print_help();
+        return (84);
+    }
     init_sfml.window = create_window("MAIS OUI BIEN SUR");
     init_sfml.framebuffer = framebuffer_create(WIDTH, HEIGHT);
     init_sfml.texture = sfTexture_createFromFile("ressources/img/texture.png", NULL);

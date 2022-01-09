@@ -29,3 +29,9 @@ sfInt64 get_timeClock(sfClock *clock)
 {
     return (sfClock_getElapsedTime(clock).microseconds);
 }
+
+void set_sprite_pos_texture(init_sfml_t *init_sfml, game_object_t *obj)
+{
+    sfSprite_setTextureRect(obj->sprite, obj->rect);
+    sfSprite_setPosition(obj->sprite, obj->pos);
+}

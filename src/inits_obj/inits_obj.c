@@ -23,7 +23,7 @@ void inits_missile(game_object_t *obj, init_sfml_t *init_sfml)
     obj[9].rect.left = 1920 * 3;
     obj[9].rect.width = 120;
     obj[9].rect.height = 43;
-    obj[9].speed = 14;
+    obj[9].speed = 20;
     obj[9].pos.x = -200;
     obj[9].pos.y = 0;
     obj[9].clock = sfClock_create();
@@ -54,4 +54,5 @@ void inits_obj(game_object_t *obj, init_sfml_t *init_sfml)
     }
     obj->game_clock.lazer_sprite = sfClock_create();
     obj->game_clock.missile_sprite = sfClock_create();
+    obj->game_clock.fly_sprite = sfClock_create();
 }
