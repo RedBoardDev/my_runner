@@ -31,10 +31,6 @@
 #define HEIGHT 1080
 #define OBJ_NBR 10
 
-#define OVERWIDTH(w)    w <= 0 ? w = 1: w; \
-                        w >= WIDTH ? w = WIDTH - 1 : w;
-#define OVERHEIGHT(h)   h <= 0 ? h = 1: h; \
-                        h >= HEIGHT ? h = HEIGHT - 1 : h;
 
 sfColor my_rgb(sfColor color);
 int clear_window(sfUint8 *fm, sfColor c);

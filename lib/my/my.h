@@ -19,6 +19,8 @@
 
 int isnum(char c);
 char *my_itoa(int nb);
+void my_putchar(char c);
+int my_putstr(char const *str);
 int my_strlen(char const *str);
 char *my_strcat(char *dest, char const *src);
 #endif

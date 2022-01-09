@@ -38,7 +38,15 @@ void get_map(init_sfml_t *init_sfml, char *avg)
 
 void print_help(void)
 {
-    // A FAIRE
+    my_putstr("Finite runner created with CSFML.\n\n");
+    my_putstr("USAGE\n  ./my_runner arguments\n");
+    my_putstr("OPTIONS\n");
+    my_putstr("  -i             launch the game in infinity mode.\n");
+    my_putstr("  -f map.txt     launch the game in maps mode.\n");
+    my_putstr("  -h             print the usage and quit.\n\n\n");
+    my_putstr("USER INTERACTIONS\n");
+    my_putstr("  SPACE_KEY       jump.\n");
+    my_putstr("  ESCAPE_KEY      play.\n");
 }
 
 int main(int avc, char **avg)
@@ -52,6 +60,9 @@ int main(int avc, char **avg)
         else if  (avg[1][1] == 'f') {
             init_sfml.infini = false;
             get_map(&init_sfml, avg[2]);
+        } else {
+            print_help();
+            return (84);
         }
     } else {
         print_help();
