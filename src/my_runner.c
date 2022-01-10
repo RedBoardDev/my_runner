@@ -24,6 +24,19 @@ play_data_t *play_data, sound_ambiant_t *sound_ambiant) {
     put_score(play_data->score, init_sfml);
 }
 
+void free_sf(sound_ambiant_t *sound_ambiant, game_object_t *obj)
+{
+    sfMusic_destroy(sound_ambiant->main);
+    sfMusic_destroy(sound_ambiant->rocket);
+    sfMusic_destroy(sound_ambiant->walk);
+    sfClock_destroy(obj->game_clock.fly_sprite);
+    sfClock_destroy(obj->game_clock.lazer_sprite);
+    sfClock_destroy(obj->game_clock.missile_sprite);
+    for (int i = 0; i < OBJ_NBR; ++i) {
+        sfClock_destroy(obj[i].clock);
+    }
+}
+
 void my_runner(init_sfml_t *init_sfml, sfClock *clock)
 {
     game_object_t *obj = malloc(sizeof(game_object_t) * OBJ_NBR);
@@ -42,4 +55,6 @@ void my_runner(init_sfml_t *init_sfml, sfClock *clock)
         }
     }
     free(obj);
+    free_sf(&sound_ambiant, obj);
+    
 }
